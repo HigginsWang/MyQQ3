@@ -6,7 +6,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QException>
-
+#include <QSqlQuery>
 #include "ChatRecordOverview.h"
 MyQQ3Client::MyQQ3Client(QWidget* parent) : QMainWindow(parent), ui(new Ui::MyQQ3ClientClass)
 {
@@ -21,10 +21,6 @@ MyQQ3Client::MyQQ3Client(QWidget* parent) : QMainWindow(parent), ui(new Ui::MyQQ
     connect(ui->FileButton, &QPushButton::clicked, [=]() {ui->mainStackedWidget->setCurrentIndex(3);});
     connect(&websocket_endpoint::instance(), &websocket_endpoint::receive_S2C_GETALLFRIENDSRET, this, &MyQQ3Client::on_receive_S2C_GETALLFRIENDSRET,Qt::ConnectionType::QueuedConnection);
     ui->mainStackedWidget->setCurrentIndex(0);
-    //ui->listView->setVerticalScrollMode(QListWidget::ScrollPerPixel);
-    //ui->listView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-
-    
 }
 
 
@@ -69,15 +65,25 @@ void MyQQ3Client::on_loginSuccessfully(QString userid, QString username)
     /// </summary>
     chatHistoryQSqlTableModel = new ChatHistoryQSqlTableModel(this, DB);
     chatHistoryQSqlTableModel->setTable("chathistory");
+    //chatHistoryQSqlTableModel->setQuery(QSqlQuery("select distinct from chathistory "));
     if (!chatHistoryQSqlTableModel->select()) { QMessageBox::warning(this, "错误", "打开chathistory数据表错误", QMessageBox::Ok, QMessageBox::NoButton); }
     chatHistoryQSqlTableModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
     chatHistoryDelegate = new ChatHistoryDelegate(this);
     ui->ChatHistoryListView->setModel(chatHistoryQSqlTableModel);
     ui->ChatHistoryListView->setItemDelegate(chatHistoryDelegate);
     ui->ChatHistoryListView->setEditTriggers(QAbstractItemView::EditTrigger::AllEditTriggers);
-    //ui->ChatHistoryListView->setIndexWidget(chatHistoryQSqlTableModel->index(1, 0), new ChatRecordOverview);
-    /*ui->tableView_2->setModel(chatHistoryQSqlTableModel);
-    ui->tableView_2->setItemDelegate(chatHistoryDelegate);*/
+    //chatHistoryQSqlTableModel->setFilter("")
+
+    /// <summary>
+    /// 初始化聊天联系人列表
+    /// </summary>
+    chatHistoryContactsModel = new ChatHistoryContactsModel(this);
+    chatHistoryContactsModel->setQuery(QSqlQuery("select userreceivername as dufiang, content from (select * from (select userreceivername , content  from (select *from chathistory order by chatrecordsendtimestamp desc) where sendorreceive = 0  group by userreceivername) union select * from (select usersendername , content from chathistory where sendorreceive = 1  group by usersendername order by chatrecordreceiverreceivetimestamp desc)) group by userreceivername;"));
+    ui->chatHistoryContactsListView->setModel(chatHistoryContactsModel);
+    ui->chatHistoryContactsListView->setItemDelegate(chatHistoyrContactsDelegate  = new ChatHistoryContactsDelegate);
+
+
+
 
     /// <summary>
     /// 发送消息请求好友列表

@@ -4,6 +4,7 @@
 #include <QVariant>
 #include <QMetaType>
 #include <QImage>
+#include <QPoint>
 //namespace Ui { class ChatRecordOverview; };
 
 class ChatRecordOverview //: public QWidget
@@ -29,6 +30,10 @@ private:
 	QString userSendName;
 	QString content;
 	QImage image;
+
+	QPoint qpointuserSendName;
+	QPoint qpointContent;
+	QPoint qpointImage;
 	
 };
 Q_DECLARE_METATYPE(ChatRecordOverview)

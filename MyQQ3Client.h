@@ -16,6 +16,8 @@
 #include "proto.pb.h"
 #include "ChatHistoryQSqlTableModel.h"
 #include "ChatHistoryDelegate.h"
+#include "ChatHistoryContactsDelegate.h"
+#include "ChatHistoryContactsModel.h"
 /*
 QT_BEGIN_NAMESPACE
 namespace Ui { class MyQQ3Client; }
@@ -51,6 +53,10 @@ private:
     ChatHistoryQSqlTableModel* chatHistoryQSqlTableModel = Q_NULLPTR;
 
     ChatHistoryDelegate* chatHistoryDelegate = Q_NULLPTR;
+
+    ChatHistoryContactsModel* chatHistoryContactsModel = Q_NULLPTR;
+
+    ChatHistoryContactsDelegate* chatHistoyrContactsDelegate = Q_NULLPTR;
 
     bool insertContactsRecord();
 

@@ -12,7 +12,14 @@
 ChatRecordOverview::ChatRecordOverview(QString userSendName_, QString content_, QImage image_):
     userSendName(userSendName_),content(content_),image(image_)
 {
+    qpointuserSendName.setX(65);
+    qpointuserSendName.setY(20);
 
+    qpointContent.setX(65);
+    qpointContent.setY(50);
+
+    qpointImage.setX(10);
+    qpointImage.setY(10);
 }
 
 ChatRecordOverview::~ChatRecordOverview()
@@ -40,14 +47,11 @@ void ChatRecordOverview::paint(QPainter* painter, const QRect& rect, const QPale
 {
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing, true);
-    //painter->setPen(Qt::pen);
-    //painter->setBrush(mode == EditMode::Editable ?
-    //    palette.highlight() :
-    //    palette.windowText());
-    painter->translate(rect.x(), rect.y());
-    painter->drawText(QPoint(65, 20), userSendName);
-    painter->drawText(QPoint(65, 50), content);
-    painter->drawImage(QPoint(10, 10), image.scaled(QSize(45, 45)));
 
+    painter->translate(rect.x(), rect.y());
+    painter->drawText(qpointuserSendName, userSendName);
+    painter->drawText(qpointContent, content);
+    painter->drawImage(qpointImage, image);
+    
     painter->restore();
 }

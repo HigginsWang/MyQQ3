@@ -16,7 +16,8 @@ QVariant ChatHistoryQSqlTableModel::data(const QModelIndex& index, int role) con
 	QModelIndex contentIndex = index.model()->index(index.row(), 11);
 	QString content = QSqlTableModel::data(contentIndex, role).toString();
 
-	QImage image(":/myqq3_9profile.jpg");
+	QImage image(":/myqq3_2profile.jpg");
+	image = image.scaled(45, 45);
 	
 	ChatRecordOverview chatRecordOverview(userSendName, content, image);
 
