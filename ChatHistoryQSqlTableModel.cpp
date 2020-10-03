@@ -6,6 +6,7 @@ ChatHistoryQSqlTableModel::ChatHistoryQSqlTableModel(QObject* parent, QSqlDataba
 	: QSqlTableModel(parent,db)
 {
 	qRegisterMetaType<ChatRecordOverview>("ChatRecordOverview");
+	
 }
 
 QVariant ChatHistoryQSqlTableModel::data(const QModelIndex& index, int role) const
@@ -37,4 +38,10 @@ bool ChatHistoryQSqlTableModel::setData(const QModelIndex& index, const QVariant
 ChatHistoryQSqlTableModel::~ChatHistoryQSqlTableModel()
 {
 
+}
+
+void ChatHistoryQSqlTableModel::setChatTarget(QString targetStr)
+{
+	setFilter("usersendername = '" + targetStr + +"'" + " or userreceivername = " + "'" + targetStr + "'");
+	//emit setChatTarget_finished_SIGNAL();
 }

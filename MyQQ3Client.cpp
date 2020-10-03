@@ -72,6 +72,7 @@ void MyQQ3Client::on_loginSuccessfully(QString userid, QString username)
     ui->ChatHistoryListView->setModel(chatHistoryQSqlTableModel);
     ui->ChatHistoryListView->setItemDelegate(chatHistoryDelegate);
     ui->ChatHistoryListView->setEditTriggers(QAbstractItemView::EditTrigger::AllEditTriggers);
+    //chatHistoryQSqlTableModel->setFilter("usersendername = liuyifei");
     //chatHistoryQSqlTableModel->setFilter("")
 
     /// <summary>
@@ -81,11 +82,16 @@ void MyQQ3Client::on_loginSuccessfully(QString userid, QString username)
     chatHistoryContactsModel->setQuery(QSqlQuery("select userreceivername as dufiang, content from (select * from (select userreceivername , content  from (select *from chathistory order by chatrecordsendtimestamp desc) where sendorreceive = 0  group by userreceivername) union select * from (select usersendername , content from chathistory where sendorreceive = 1  group by usersendername order by chatrecordreceiverreceivetimestamp desc)) group by userreceivername;"));
     ui->chatHistoryContactsListView->setModel(chatHistoryContactsModel);
     ui->chatHistoryContactsListView->setItemDelegate(chatHistoyrContactsDelegate  = new ChatHistoryContactsDelegate);
-    ui->chatHistoryContactsListView->setEditTriggers(QAbstractItemView::EditTrigger::DoubleClicked);
-    //ui->chatHistoryContactsListView->setitem
 
 
-
+    connect(
+        chatHistoyrContactsDelegate,
+        SIGNAL(setChatTarget_SINGAL(QString)),
+        chatHistoryQSqlTableModel, 
+        SLOT(setChatTarget(QString))
+    );
+    //connect(chatHistoryQSqlTableModel, SIGNAL(setChatTarget_SINGAL(QString)), chatHistoryQSqlTableModel, ));
+    //connect(chatHistoryQSqlTableModel, SIGNAL(setChatTarget_finished_SIGNAL), this, SLOT(on_setChatTarget_finished_SIGNAL));
     /// <summary>
     /// 发送消息请求好友列表
     /// </summary>
@@ -163,6 +169,11 @@ void MyQQ3Client::add()
     cout << tableModel->insertRecord(-1, rdd) << endl;
     cout << tableModel->lastError().text().toStdString() << endl;
     cout << tableModel->submitAll() << endl;
+}
+
+void MyQQ3Client::on_setChatTarget_finished_SIGNAL()
+{
+    if (chatHistoryQSqlTableModel != nullptr)chatHistoryQSqlTableModel->select();
 }
 
 void MyQQ3Client::addContact(QVariant user1id, QVariant user1name, QVariant user2id, QVariant user2name, QVariant user2inuser1markname, QVariant user1inuser2markname, QVariant becomefriendtime)

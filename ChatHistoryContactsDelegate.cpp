@@ -11,7 +11,7 @@ ChatHistoryContactsDelegate::~ChatHistoryContactsDelegate()
 
 ChatHistoryContactsDelegate::ChatHistoryContactsDelegate(QObject* parent) : QStyledItemDelegate(parent)
 {
-
+	//connect(this, SIGNAL(setChatTarget_SINGAL(QString)), this, SLOT(setChatTarget(QString)));
 }
 
 //QWidget* ChatHistoryContactsDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -60,7 +60,9 @@ bool ChatHistoryContactsDelegate::editorEvent(QEvent* event, QAbstractItemModel*
 	QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
 	if (event->type() == QEvent::MouseButtonPress && rect.contains(mouseEvent->pos()))
 	{
-		std::cout << "good" << std::endl;
+		ChatRecordOverview chatRecordOverview = qvariant_cast<ChatRecordOverview>(index.data());
+		std::cout << chatRecordOverview.getUserSendName().toStdString() << std::endl;
+		emit setChatTarget_SINGAL(chatRecordOverview.getUserSendName());
 	}
 	return QStyledItemDelegate::editorEvent(event, model, option, index);
 }

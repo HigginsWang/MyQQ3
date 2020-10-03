@@ -28,5 +28,8 @@ public:
 private:
 
 private slots:
+
+signals:
+	void setChatTarget_SINGAL(QString targetStr);
 };
 

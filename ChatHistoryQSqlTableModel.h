@@ -18,4 +18,17 @@ public:
 	~ChatHistoryQSqlTableModel();
 
 private:
+
+
+signals:
+	void setChatTarget_finished_SIGNAL();
+	//void setChatTarget_SINGAL(QString targetStr);
+
+
+	
+
+
+private slots:
+
+	void setChatTarget(QString targetStr);
 };

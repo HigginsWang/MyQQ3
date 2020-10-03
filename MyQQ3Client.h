@@ -73,4 +73,6 @@ private slots:
         QVariant user2inuser1markname, QVariant user1inuser2markname, QVariant becomefriendtime);
     
     void add();
+
+    void on_setChatTarget_finished_SIGNAL();
 };
