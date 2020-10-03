@@ -15,7 +15,7 @@ QVariant ChatHistoryContactsModel::data(const QModelIndex& index, int role) cons
 {
 	QModelIndex userSendNameIndex = index.model()->index(index.row(), 0);
 	QString userName = QSqlQueryModel::data(userSendNameIndex, role).toString();
-
+	//return userName;
 	QModelIndex contentIndex = index.model()->index(index.row(), 1);
 	QString content = QSqlQueryModel::data(contentIndex, role).toString();
 
@@ -25,7 +25,6 @@ QVariant ChatHistoryContactsModel::data(const QModelIndex& index, int role) cons
 	ChatRecordOverview chatRecordOverview(userName, content, image);
 
 	return QVariant::fromValue(chatRecordOverview);
-	return QVariant();
 }
 
 bool ChatHistoryContactsModel::setData(const QModelIndex& index, const QVariant& value, int role)

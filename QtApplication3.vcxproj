@@ -91,6 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChatHistoryContactEditor.cpp" />
     <ClCompile Include="ChatHistoryContactOverview.cpp" />
     <ClCompile Include="ChatHistoryContactsDelegate.cpp" />
     <ClCompile Include="ChatHistoryContactsModel.cpp" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ChatHistoryContactsDelegate.h" />
+    <QtMoc Include="ChatHistoryContactEditor.h" />
     <ClInclude Include="ChatHistoryContactOverview.h" />
     <QtMoc Include="ChatHistoryContactsModel.h" />
     <ClInclude Include="proto.pb.h" />
@@ -125,6 +127,7 @@
     <QtMoc Include="FriendOverview.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="ChatHistoryContactEditor.ui" />
     <QtUic Include="ChatRecordOverview.ui" />
     <QtUic Include="FriendOverview.ui" />
     <QtUic Include="logindialog.ui" />

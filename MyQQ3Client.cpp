@@ -81,7 +81,8 @@ void MyQQ3Client::on_loginSuccessfully(QString userid, QString username)
     chatHistoryContactsModel->setQuery(QSqlQuery("select userreceivername as dufiang, content from (select * from (select userreceivername , content  from (select *from chathistory order by chatrecordsendtimestamp desc) where sendorreceive = 0  group by userreceivername) union select * from (select usersendername , content from chathistory where sendorreceive = 1  group by usersendername order by chatrecordreceiverreceivetimestamp desc)) group by userreceivername;"));
     ui->chatHistoryContactsListView->setModel(chatHistoryContactsModel);
     ui->chatHistoryContactsListView->setItemDelegate(chatHistoyrContactsDelegate  = new ChatHistoryContactsDelegate);
-
+    ui->chatHistoryContactsListView->setEditTriggers(QAbstractItemView::EditTrigger::DoubleClicked);
+    //ui->chatHistoryContactsListView->setitem
 
 
 

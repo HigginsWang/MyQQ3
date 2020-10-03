@@ -63,6 +63,9 @@
     <ClCompile Include="ChatHistoryContactsModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ChatHistoryContactEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ContactsDelegate.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ChatHistoryContactsModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ChatHistoryContactEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -124,6 +130,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="ChatRecordOverview.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ChatHistoryContactEditor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

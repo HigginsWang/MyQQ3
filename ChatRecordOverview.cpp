@@ -46,7 +46,7 @@ void ChatRecordOverview::setQImage(QImage image_)
 void ChatRecordOverview::paint(QPainter* painter, const QRect& rect, const QPalette& palette) const
 {
     painter->save();
-    painter->setRenderHint(QPainter::Antialiasing, true);
+    //painter->setRenderHint(QPainter::Antialiasing, true);
 
     painter->translate(rect.x(), rect.y());
     painter->drawText(qpointuserSendName, userSendName);
