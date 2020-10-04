@@ -1,6 +1,12 @@
 #include "ChatRecordOverview.h"
 //#include "ui_ChatRecordOverview.h"
 #include <QPainter>
+#include <QStyle>
+#include <QApplication>
+#include <QtWidgets\qstyleoption.h>
+#include <QRect>
+#include <iostream>
+#include <QDateTime>
 //ChatRecordOverview::ChatRecordOverview(QWidget *parent)
 //	: QWidget(parent)
 //{
@@ -45,13 +51,27 @@ void ChatRecordOverview::setQImage(QImage image_)
 
 void ChatRecordOverview::paint(QPainter* painter, const QRect& rect, const QPalette& palette) const
 {
+    std::cout << "paintBe:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     painter->save();
     //painter->setRenderHint(QPainter::Antialiasing, true);
-
+    QPixmap pixmap(rect.width(), rect.height());
+    pixmap.fill(QColor(0,0,0,0));
+  /*  QStyleOptionViewItem item;
+    item.rect.setRect(rect.x(), rect.y(), rect.width(), rect.height());
+    item.text = content;
+    item.textElideMode = Qt::ElideLeft;*/
     painter->translate(rect.x(), rect.y());
-    painter->drawText(qpointuserSendName, userSendName);
-    painter->drawText(qpointContent, content);
-    painter->drawImage(qpointImage, image);
     
+    painter->drawText(qpointuserSendName, userSendName);
+    std::cout << userSendName.toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    painter->drawText(qpointContent, content);
+    std::cout << content.toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    painter->drawImage(qpointImage, image);
+    std::cout << "drawImage:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    //painter->end();
+    //QApplication::style()->drawPrimitive(QStyle::PrimitiveElement::PE_Frame, &item, painter, this);
+    //QApplication::style()->drawControl()
+    painter->drawPixmap(0, 0, pixmap);
+    std::cout << "drawPixmap:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     painter->restore();
 }

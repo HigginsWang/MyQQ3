@@ -33,6 +33,8 @@ void ChatHistoryDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	else {
 		QStyledItemDelegate::paint(painter, option, index);
 	}
+
+	
 }
 
 void ChatHistoryDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const

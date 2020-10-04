@@ -1,12 +1,15 @@
 #include "ChatHistoryQSqlTableModel.h"
 #include <QImage>
-
+#include <QDateTime>
+#include <iostream>
 #include "ChatRecordOverview.h"
 ChatHistoryQSqlTableModel::ChatHistoryQSqlTableModel(QObject* parent, QSqlDatabase db )
 	: QSqlTableModel(parent,db)
 {
 	qRegisterMetaType<ChatRecordOverview>("ChatRecordOverview");
-	
+	//setHeaderData(2, Qt::Orientation::Horizontal, "", Qt::UserRole + 1);
+	//setHeaderData(11, Qt::Orientation::Horizontal, "", Qt::UserRole + 2);
+
 }
 
 QVariant ChatHistoryQSqlTableModel::data(const QModelIndex& index, int role) const
@@ -43,5 +46,7 @@ ChatHistoryQSqlTableModel::~ChatHistoryQSqlTableModel()
 void ChatHistoryQSqlTableModel::setChatTarget(QString targetStr)
 {
 	setFilter("usersendername = '" + targetStr + +"'" + " or userreceivername = " + "'" + targetStr + "'");
-	//emit setChatTarget_finished_SIGNAL();
+	select();
+	
+	std::cout << "setChatTarget:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
 }

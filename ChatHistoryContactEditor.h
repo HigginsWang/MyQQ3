@@ -24,4 +24,5 @@ public:
 private:
 	Ui::ChatHistoryContactEditor *ui;
 	ChatHistoryContactOverview chco;
+	QPainter painter;
 };

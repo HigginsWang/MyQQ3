@@ -48,6 +48,7 @@ private:
 
     //ContactsDelegate* contactsDelegatePtr = Q_NULLPTR;
 
+
     QDataWidgetMapper* contactsDataMapper = Q_NULLPTR;
 
     ChatHistoryQSqlTableModel* chatHistoryQSqlTableModel = Q_NULLPTR;

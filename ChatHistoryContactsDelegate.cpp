@@ -5,6 +5,7 @@
 #include "ChatHistoryContactEditor.h"
 #include <QPushButton>
 #include <QMouseEvent>
+#include <QDateTime>
 ChatHistoryContactsDelegate::~ChatHistoryContactsDelegate()
 {
 }
@@ -27,7 +28,7 @@ ChatHistoryContactsDelegate::ChatHistoryContactsDelegate(QObject* parent) : QSty
 
 void ChatHistoryContactsDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	if (option.state & QStyle::State_Sunken)std::cout << "cout" << std::endl;
+	//if (option.state & QStyle::State_Sunken)std::cout << "cout" << std::endl;
 	if (index.data().canConvert<ChatRecordOverview>()) {
 		ChatRecordOverview chatRecordOverview = qvariant_cast<ChatRecordOverview>(index.data());
 
@@ -61,7 +62,8 @@ bool ChatHistoryContactsDelegate::editorEvent(QEvent* event, QAbstractItemModel*
 	if (event->type() == QEvent::MouseButtonPress && rect.contains(mouseEvent->pos()))
 	{
 		ChatRecordOverview chatRecordOverview = qvariant_cast<ChatRecordOverview>(index.data());
-		std::cout << chatRecordOverview.getUserSendName().toStdString() << std::endl;
+		std::cout << "-----------------------------------------------------------------------" << std::endl;
+		std::cout << chatRecordOverview.getUserSendName().toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
 		emit setChatTarget_SINGAL(chatRecordOverview.getUserSendName());
 	}
 	return QStyledItemDelegate::editorEvent(event, model, option, index);

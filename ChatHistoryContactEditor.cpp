@@ -15,6 +15,6 @@ ChatHistoryContactEditor::~ChatHistoryContactEditor()
 
 void ChatHistoryContactEditor::paintEvent(QPaintEvent* event)
 {
-	QPainter painter;
+	
 	chco.paint(&painter, rect(), palette());
 }

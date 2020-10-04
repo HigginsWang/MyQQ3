@@ -13,7 +13,7 @@ public:
     explicit ContactsDelegate(QObject* parent = Q_NULLPTR);
 
     using QStyledItemDelegate::QStyledItemDelegate;
-    //QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+
     QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,const QModelIndex& index) const Q_DECL_OVERRIDE;
 
     void updateEditorGeometry(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;

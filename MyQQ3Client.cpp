@@ -72,8 +72,9 @@ void MyQQ3Client::on_loginSuccessfully(QString userid, QString username)
     ui->ChatHistoryListView->setModel(chatHistoryQSqlTableModel);
     ui->ChatHistoryListView->setItemDelegate(chatHistoryDelegate);
     ui->ChatHistoryListView->setEditTriggers(QAbstractItemView::EditTrigger::AllEditTriggers);
-    //chatHistoryQSqlTableModel->setFilter("usersendername = liuyifei");
-    //chatHistoryQSqlTableModel->setFilter("")
+    ui->ChatHistoryListView->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
+
+    //ui->listWidget->setModel(chatHistoryQSqlTableModel);
 
     /// <summary>
     /// 初始化聊天联系人列表
