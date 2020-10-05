@@ -51,7 +51,7 @@ void ChatRecordOverview::setQImage(QImage image_)
 
 void ChatRecordOverview::paint(QPainter* painter, const QRect& rect, const QPalette& palette) const
 {
-    std::cout << "paintBe:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    //std::cout << "paintBe:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     painter->save();
     //painter->setRenderHint(QPainter::Antialiasing, true);
     QPixmap pixmap(rect.width(), rect.height());
@@ -63,15 +63,15 @@ void ChatRecordOverview::paint(QPainter* painter, const QRect& rect, const QPale
     painter->translate(rect.x(), rect.y());
     
     painter->drawText(qpointuserSendName, userSendName);
-    std::cout << userSendName.toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    //std::cout << userSendName.toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     painter->drawText(qpointContent, content);
-    std::cout << content.toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    //std::cout << content.toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     painter->drawImage(qpointImage, image);
-    std::cout << "drawImage:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    //std::cout << "drawImage:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     //painter->end();
     //QApplication::style()->drawPrimitive(QStyle::PrimitiveElement::PE_Frame, &item, painter, this);
     //QApplication::style()->drawControl()
     painter->drawPixmap(0, 0, pixmap);
-    std::cout << "drawPixmap:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+    //std::cout << "drawPixmap:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
     painter->restore();
 }

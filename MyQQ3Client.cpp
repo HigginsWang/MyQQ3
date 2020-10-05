@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QException>
 #include <QSqlQuery>
+#include "Utility.h"
 #include "ChatRecordOverview.h"
 MyQQ3Client::MyQQ3Client(QWidget* parent) : QMainWindow(parent), ui(new Ui::MyQQ3ClientClass)
 {
@@ -21,6 +22,8 @@ MyQQ3Client::MyQQ3Client(QWidget* parent) : QMainWindow(parent), ui(new Ui::MyQQ
     connect(ui->FileButton, &QPushButton::clicked, [=]() {ui->mainStackedWidget->setCurrentIndex(3);});
     connect(&websocket_endpoint::instance(), &websocket_endpoint::receive_S2C_GETALLFRIENDSRET, this, &MyQQ3Client::on_receive_S2C_GETALLFRIENDSRET,Qt::ConnectionType::QueuedConnection);
     ui->mainStackedWidget->setCurrentIndex(0);
+
+    connect(ui->sendChatRecordButton, SIGNAL(clicked()), this, SLOT(on_sendChatRecordButton_Click()));
 }
 
 
@@ -175,6 +178,30 @@ void MyQQ3Client::add()
 void MyQQ3Client::on_setChatTarget_finished_SIGNAL()
 {
     if (chatHistoryQSqlTableModel != nullptr)chatHistoryQSqlTableModel->select();
+}
+
+
+/// <summary>
+/// 点击发送按钮时执行
+/// </summary>
+void MyQQ3Client::on_sendChatRecordButton_Click()
+{
+    cout << "on_sendChatRecordButton_Click" << endl;
+    QString sendText = ui->chatRecordInputPlainTextEdit->toPlainText();
+    if (sendText.isNull() || sendText.isEmpty())return;
+
+    MyQQ3Proto::CHATRECORD chatRecord;
+    chatRecord.set_chatrecordtype(MyQQ3Proto::CHATRECORD::CHATRECORDTYPE::CHATRECORD_CHATRECORDTYPE_CHATRECORDTYPE_TEXTPLUSEMOJO);
+    chatRecord.set_content(sendText.toStdString());
+    chatRecord.set_uuid(Utility::generateUUID());
+    chatRecord.set_usersenderid(m_userid);
+    chatRecord.set_usersendername(m_username);
+
+    string userreceiverid = "myqq3_2";
+    string userreceivername = "wangxiaojie";
+    chatRecord.set_chatrecordsendtimestamp(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString());
+    websocket_endpoint::instance().send(chatRecord.SerializeAsString(), message_type::CHATRECORD);
+    ui->chatRecordInputPlainTextEdit->setPlainText("");
 }
 
 void MyQQ3Client::addContact(QVariant user1id, QVariant user1name, QVariant user2id, QVariant user2name, QVariant user2inuser1markname, QVariant user1inuser2markname, QVariant becomefriendtime)

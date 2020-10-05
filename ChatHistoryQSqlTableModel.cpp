@@ -48,5 +48,5 @@ void ChatHistoryQSqlTableModel::setChatTarget(QString targetStr)
 	setFilter("usersendername = '" + targetStr + +"'" + " or userreceivername = " + "'" + targetStr + "'");
 	select();
 	
-	std::cout << "setChatTarget:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+	//std::cout << "setChatTarget:" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
 }

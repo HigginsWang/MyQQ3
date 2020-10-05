@@ -38,6 +38,10 @@ private:
 
     std::string m_username;
 
+    std::string m_currentChatTargetUserId;
+    
+    std::string m_currentChatTargetUserName;
+
     Ui::MyQQ3ClientClass *ui;
 
     QSqlDatabase DB = QSqlDatabase::addDatabase("QSQLITE");
@@ -47,7 +51,6 @@ private:
     //QTableView *tableView = Q_NULLPTR;
 
     //ContactsDelegate* contactsDelegatePtr = Q_NULLPTR;
-
 
     QDataWidgetMapper* contactsDataMapper = Q_NULLPTR;
 
@@ -76,4 +79,6 @@ private slots:
     void add();
 
     void on_setChatTarget_finished_SIGNAL();
+    
+    void on_sendChatRecordButton_Click();
 };

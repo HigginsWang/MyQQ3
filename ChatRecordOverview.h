@@ -5,6 +5,7 @@
 #include <QMetaType>
 #include <QImage>
 #include <QPoint>
+#include <QPlainTextEdit>
 //namespace Ui { class ChatRecordOverview; };
 
 class ChatRecordOverview //: public QWidget
@@ -34,6 +35,9 @@ private:
 	QPoint qpointuserSendName;
 	QPoint qpointContent;
 	QPoint qpointImage;
+
+
+
 	
 };
 Q_DECLARE_METATYPE(ChatRecordOverview)

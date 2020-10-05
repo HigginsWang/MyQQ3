@@ -62,8 +62,8 @@ bool ChatHistoryContactsDelegate::editorEvent(QEvent* event, QAbstractItemModel*
 	if (event->type() == QEvent::MouseButtonPress && rect.contains(mouseEvent->pos()))
 	{
 		ChatRecordOverview chatRecordOverview = qvariant_cast<ChatRecordOverview>(index.data());
-		std::cout << "-----------------------------------------------------------------------" << std::endl;
-		std::cout << chatRecordOverview.getUserSendName().toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
+		//std::cout << "-----------------------------------------------------------------------" << std::endl;
+		//std::cout << chatRecordOverview.getUserSendName().toStdString() + ":" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString() << std::endl;
 		emit setChatTarget_SINGAL(chatRecordOverview.getUserSendName());
 	}
 	return QStyledItemDelegate::editorEvent(event, model, option, index);

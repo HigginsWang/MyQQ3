@@ -105,11 +105,13 @@
     <ClCompile Include="MyQQ3Client.cpp" />
     <ClCompile Include="net.cpp" />
     <ClCompile Include="proto.pb.cc" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ContactsDelegate.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Utility.h" />
     <QtMoc Include="ChatHistoryContactsDelegate.h" />
     <QtMoc Include="ChatHistoryContactEditor.h" />
     <ClInclude Include="ChatHistoryContactOverview.h" />

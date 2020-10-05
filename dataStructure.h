@@ -20,8 +20,10 @@ enum class message_type
     S2C_GETALLFRIENDSRET,
 
 
-    USER_USERID_USERNAME = 0x00010000
-
+    USER_USERID_USERNAME = 0x00010000,
+    FILE,
+    LINK,
+    CHATRECORD
     
 
     
